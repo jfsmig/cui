@@ -38,15 +38,19 @@ const (
 // MonitoredItem describe the expectation for any monitorable item: just a set of metadata tha can be queried
 // independently.
 type MonitoredItem interface {
+
 	// GetPrimaryKey returns the defauly key that will be used by the application if none is explicitly selected.
 	// The returned primary key should be an element of the array of all the possible keys returned by GetKeys.
 	GetPrimaryKey() string
+
 	// GetKeys Return all the keys of the metadata properties.
 	// Subsequent calls should return the same array: same entries, same order.
 	// The array should contain the value returned by GetPrimaryKey.
 	GetKeys() []string
+
 	// GetValue returns the value of a single given key. Any error results in an empty output.
 	GetValue(k string) string
+
 	// GetDetail generates a description of the object, that will be displayed in the "detail" panel when not in
 	// "table" mode. The MonitoredItem implementation MAY return a dump of the metadata (i.e the keys and their
 	// respective values), the application doesn't care.
@@ -68,14 +72,18 @@ type monitorApp struct {
 
 	// Displays the main query string that configures the source of objects
 	panelQuery *gocui.View
+
 	// A coma-separated list of fnmatch patterns to restrict the fields displayed in the list panel
 	panelFilter *gocui.View
+
 	// A minor panel to display the last error encountered.
 	panelError *gocui.View
+
 	// The main panel displaying the selected key of all the objects fetched using the query string.
 	// Moving the cursor along the list selects a new object on each movement, and update the details
 	// Panel.
 	panelList *gocui.View
+
 	// A panel displaying either the full detail of the selected object, or a table of the selected field.
 	panelDetail *gocui.View
 
