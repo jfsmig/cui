@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jean-Francois Smigielski
+// Copyright (c) 2022-2023 Jean-Francois Smigielski
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -11,12 +11,13 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"errors"
-	"github.com/jfsmig/cui"
 	"io"
 	"log"
 	"math/rand"
 	"strconv"
 	"strings"
+
+	"github.com/jfsmig/cui"
 )
 
 func main() {
@@ -68,8 +69,8 @@ func (dl *staticMapsSource) FetchAll(query string) ([]cui.MonitoredItem, error) 
 
 	max := 1024
 	for i := 0; i < max; i++ {
-		item := items[offset % uint64(len(items))]
-		offset ++
+		item := items[offset%uint64(len(items))]
+		offset++
 		out = append(out, item)
 	}
 	return out, nil

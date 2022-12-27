@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Jean-Francois Smigielski
+// Copyright (c) 2022-2023 Jean-Francois Smigielski
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -10,11 +10,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/jfsmig/cui"
 	"log"
 	"net/rpc"
 	"strings"
 	"time"
+
+	"github.com/jfsmig/cui"
 )
 
 func main() {
@@ -68,7 +69,7 @@ func (dl *extenTitanObjectsSource) FetchAll(query string) ([]cui.MonitoredItem, 
 		return out, errors.New("Empty query")
 	}
 
-	client, err := rpc.DialHTTP("tcp", query + ":2233")
+	client, err := rpc.DialHTTP("tcp", query+":2233")
 	if err != nil {
 		return out, fmt.Errorf("can't connect to systest agent: %w", err)
 	}
